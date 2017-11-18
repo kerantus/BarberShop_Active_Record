@@ -6,11 +6,5 @@ class CreateBarbers < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-
-    Barbers.create :name => 'kegz'
-    Barbers.create :name => 'kerantus'
-    Barbers.create :name => 'karapuz'
-
-
   end
 end
