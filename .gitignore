@@ -1,2 +1,10 @@
 
 barbershop.db
+db/migrate/20171117141550_create_clients.rb
+db/migrate/20171117141550_create_clients.rb
+db/migrate/20171117141550_create_clients.rb
+db/migrate/20171117141550_create_clients.rb
+db/migrate/20171117143253_create_barbers.rb
+db/migrate/20171117141550_create_clients.rb
+db/migrate/20171118153858_create_comment.rb
+db/migrate/20171118162118_create_blog.rb

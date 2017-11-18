@@ -1,0 +1,7 @@
+<h2>Ваши записи</h2>
+<% @blog.each do |value| %>
+<h4><%= value["name"] %></h4>
+    <p style="font-size: 60%; color: #999"><%= value["created_at"] %></p>
+<p><%= value["content"] %></p>
+    <a href="/details/<%= value["id"] %>">Подробнее</a>
+<% end %>

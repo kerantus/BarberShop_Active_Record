@@ -1,0 +1,25 @@
+<h4>Автор поста: <%= @post["name"] %></h4>
+<p><%= @post["content"] %></p>
+
+
+<h4>Коментарии</h4>
+</br>
+<% @comment.each do |value| %>
+    <p><%= value["name"] %></p>
+    <p><%= value["content"] %></p>
+    <p style="font-size: 60%; color: #999"><%= value["created_at"] %></p>
+    </br>
+<% end %>
+
+<p>
+<form action="/details/<%= @post["id"] %>" method="POST" role="form">
+  <div class="form-inline form-group">
+    <label for="exampleInputName2">Ваше имя</label>
+    <input name="user_name" type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+  </div>
+  </br>
+  <textarea name="user_comment" rows="9" placeholder="Ваш комментарий" style='width: 600px'></textarea>
+  </br>
+  <button type="submit" class="btn btn-success">Отправить</button>
+</form>
+</p>

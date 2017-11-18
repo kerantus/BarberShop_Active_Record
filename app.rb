@@ -17,22 +17,27 @@ end
 class Contacts < ActiveRecord::Base
 end
 
-#==================================================
+class Blog < ActiveRecord::Base
+end
 
+class Comment < ActiveRecord::Base
+end
+
+#==================================================
 
 
 get '/' do
   @barbers = Barbers.order "created_at DESC"
-	erb :index
+  erb :index
 end
 
 get '/visit' do
-	@master = Barbers.all
+  @master = Barbers.all
   erb :visit
 end
 
 post '/visit' do
-	@error = ''
+  @error = ''
   errors = {
       "user_name" => "Введите имя",
       "user_phone" => "Введите телефон",
@@ -45,11 +50,11 @@ post '/visit' do
   end
   if @error != ''
     @master = Barbers.all
-		return erb :visit
+    return erb :visit
   end
-  Client.create :name => params[:name_user], :phone => params[:user_phone],  :datestamp => params[:user_time],  :barber => params[:user_master],  :color => params[:color]
+  Client.create :name => params[:name_user], :phone => params[:user_phone], :datestamp => params[:user_time], :barber => params[:user_master], :color => params[:color]
   @message = "Вы успешно записаны на #{params[:user_time]}"
-	#params.each_with_index { |value, index | @write_data[index] = value }
+  #params.each_with_index { |value, index | @write_data[index] = value }
   erb :message
 end
 
@@ -107,4 +112,40 @@ post '/contacts' do
     Contacts.create :email => params[:user_email], :content => params[:user_message]
     erb :message
   end
+end
+
+get '/blog' do
+  @blog = Blog.all
+  erb :blog
+end
+
+get '/new' do
+  erb :new
+end
+
+post '/new' do
+  if params[:text_new_post].length <= 0
+    @error = 'Введите текст'
+    return erb :new
+  end
+  Blog.create "name" => params[:user_new_post], "content" => params[:text_new_post]
+  redirect '/'
+end
+
+get '/details/:post_id' do
+  @post = Blog.find(params[:post_id])
+  @comment = Comment.all
+  erb :details
+end
+
+post '/details/:post_id' do
+  @error = ""
+  params[:user_name] == "" ? @error = @error + "Введите ваше имя" : ''
+  params[:user_comment] == "" ? @error = @error + "Введите комментарий" : ""
+  if @error > ""
+    return erb :details
+  else
+    Comment.create "name" => params[:user_name], "content" => params[:user_comment]
+  end
+  redirect "/details/#{params[:post_id]}"
 end
