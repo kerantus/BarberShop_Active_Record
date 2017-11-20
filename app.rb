@@ -114,6 +114,9 @@ post '/contacts' do
   end
 end
 
+#=======================================================
+#блог
+
 get '/blog' do
   @blog = Blog.all
   erb :blog
@@ -132,6 +135,10 @@ post '/new' do
   redirect '/'
 end
 
+
+
+#=============================================
+# детали поста
 get '/details/:post_id' do
   @post = Blog.find(params[:post_id])
   @comment = Comment.all
